@@ -2,14 +2,17 @@ body {
     /* border: 1px solid red */
     margin: 0;
     font-family: 'Inter', sans-serif;
+    color: var(--baseColor);
+    background: var(--baseBackground);
 }
-
+/* creacion del dark-mode */
 .dark-mode {
     display: flex;
     justify-content: space-between;
     padding-top: 1em;
 }
 
+/* switch de transicion */
 .checkbox {
     display: none;
 }
@@ -23,7 +26,7 @@ body {
     height: 40px;
     display: block;
     border-radius: 20px;
-    background: var(--gray);
+    background: var(--switch);
     width: 80px;
     padding: 5px;
     box-sizing: border-box;
@@ -35,16 +38,17 @@ body {
     display: block;
     width: 30px;
     height: 30px;
-    background: white;
+    background: var(--switchSpinner);
     border-radius: 50%;
     transform: translateX(40px);
     transition: .3s;
     will-change: transform;
 }
 
+/* controlador del header */
 .header {
     /* border: 1px solid red; */
-    background: #f8f9fe;
+    background: var(--lightGray);
     padding-bottom: 100px;
     border-radius: 0 0 20px 20px;
     padding-top: 2em;
@@ -71,6 +75,12 @@ h1 {
     --youTube: hsl(348, 97%, 39%);
     --gray: #5f616d;
     --cardGray: #f0f3fa;
+    --lightGray: #f8f9fe;
+    --cardTitle: #6f717e;
+    --baseColor: #1d2029;
+    --baseBackground: white;
+    --switchSpinner: white;
+    --switch: #5f616d;
 }
 .wrapper {
     padding: 0 30px;
@@ -86,6 +96,31 @@ h1 {
     margin-top: -50px;
     margin-bottom: 3em;
 }
+
+/*lineas de superior, decoracion de colores del card*/
+.card.facebook::before {
+    background: var(--facebook);   
+}
+.card.instagram::before {
+    background-image: linear-gradient(to right, var(--instagram-1) 0%, var(--instagram-2) 100%);
+}
+.card.twitter::before {
+    background: var(--twitter);
+}
+.card.linkedin::before {
+    background: var(--youTube);
+}
+.card:before {
+    content: "";
+    height: 4px;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+/* cuerpo de las tarjetas */
 .card {
     /* border-top: 1px solid blue; */
     /* display: none; */
@@ -97,34 +132,13 @@ h1 {
     position: relative;
 }
 
-.card:before {
-    content: "";
-    height: 4px;
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-}
-.card.facebook::before {
-    background: var(--facebook);
-    
-}
-.card.instagram::before {
-    background-image: linear-gradient(to right, var(--instagram-1) 0%, var(--instagram-2) 100%);
-}
-.card.twitter::before {
-    background: var(--twitter);
-}
-.card.linkedin::before {
-    background: var(--youTube);
-}
+/* titulos de las tarjetas */
 .card-title {
     /* border: 1px solid purple; */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6f717e;
+    color: var(--cardTitle);
     font-size: .9em;
     font-weight: bold;
 }
@@ -132,6 +146,8 @@ h1 {
     margin-right: 5px;
 }
 
+
+/* numero de los seguidores de las tarjetas */
 .card-followers {
     /* border: 1px solid green; */
 }
@@ -146,7 +162,7 @@ h1 {
     /* border: 1px solid blue; */
     display: block;
     text-transform: uppercase;
-    color: var(--gray);
+    color: var(--cardTitle);
     letter-spacing: 5px;
     font-size: .75em;
     /* margin-bottom: ; */
@@ -181,7 +197,7 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-row-gap: 1em;
-    background: #f0f3fa;
+    background: var(--cardGray);
     border-radius: 8px;
     padding: 1.7em;
 }
@@ -190,7 +206,7 @@ h2 {
 }
 .card-small-views {
     /* border: 1px solid blue; */
-    color: var(--gray);
+    color: var(--cardTitle);
     font-weight: bold;
     font-size: .9em;
 }
@@ -261,40 +277,45 @@ h2 {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-column-gap: 25px;
     }
+    .header-total {
+        border: none;
+    }
+    .header-grid {
+        display: grid;
+        grid-template-columns: 1fr 200px;
+    }
+}
+
+.is-dark-mode {
+    --cardGray: #252b43;
+    --baseBackground: #1d2029;
+    --baseColor: White;
+    --gray: #8088ad;
+    --lightGray: #1d2029;
+    --cardTitle: #8088ad;
+    --switchSpinner: #282943;
+    --switch: linear-gradient(to right, #4796d2 0%, #37ce8f 100%);
+}
+.is-light-mode {
+    --gray: #5f616d;
+    --cardGray: #f0f3fa;
+    --lightGray: #f8f9fe;
+    --cardTitle: #6f717e;
+    --baseColor: #1d2029;
+    --baseBackground: white;
+    --switchSpinner: white;
+    --switch: #5f616d;
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background: #1d2029;
-        color: white;
-    }
-    .header {
-        background: #1d2029;
-        
-    }
     :root {
         --cardGray: #252b43;
+        --baseBackground: #1d2029;
+        --baseColor: White;
         --gray: #8088ad;
-    }
-    .card {
-        /* color: white; */
-    }
-    .card-followers-title {
-        color: #8088ad;
-    }
-    .card-title {
-        color: var(--gray);
-    }
-    .card-small {
-        background: #252b43;
-    }
-    .card-small-views {
-        color: #8088ad;
-    }
-    .switch {
-        background-image: linear-gradient(to right, #4796d2 0%, #37ce8f 100%);
-    }
-    .switch::before {
-        background: #282943;
+        --lightGray: #1d2029;
+        --cardTitle: #8088ad;
+        --switchSpinner: #282943;
+        --switch: linear-gradient(to right, #4796d2 0%, #37ce8f 100%);
     }
 }
